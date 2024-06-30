@@ -4,6 +4,8 @@ var uppercaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "
 var lowercaseLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var specialCharacters = ["!", "#", "$", "&", "*", "(", ")", "-", "_"];
+var masterListArray = [];
+var inputArray = [];
 
 // generatePassword = (random selection from uppercase/ lowercase/ numbers/ specialcharacters arrays).length = passwordLength
 
@@ -19,39 +21,37 @@ var generatePassword = function() {
   var uppercaseConfirm = window.confirm("Would you like to include UPPERCASE letters in your password?");
     if (uppercaseConfirm) {
       // include uppercase letters in the generated password
-    } else {
-      // don't include uppercase letters in generated password
+      masterListArray = masterListArray.concat(uppercaseLetters);
     }
 
   // Confirm lowercase letters
   var lowercaseConfirm = window.confirm("Would you like to include LOWERCASE letters in your password?");
     if (lowercaseConfirm) {
       // include lowercase letters
-    } else {
-      // dont't include lowercase letters
+      masterListArray = masterListArray.concat(lowercaseLetters);
     }
 
   // Confirm numbers
   var numberConfirm = window.confirm("Would you like to include NUMBERS in your password?")
     if (numberConfirm) {
       // include numbers
-    } else {
-      // dont include numbers
+      masterListArray = masterListArray.concat(numbers);
     }
 
   // Confirm special characters
   var specialCharactersComfirm = window.confirm("Would you like to include SPECIAL CHARACTERS in your password?");
     if (specialCharactersComfirm) {
       // include special characters
-    } else {
-      // don't include special characters
+      masterListArray = masterListArray.concat(specialCharacters);
     }
-    validateSelections();
+
+    // iterate through the generatePassword() function until the passwordLength is matched
+    for (var i = 0; i < passwordLength; i++) {
+      inputArray.push (masterListArray[Math.floor(Math.random() * masterListArray.length)]);
+    } 
+    return inputArray.join("");
 }
 
-var validateSelections = function() {
-  // confirm that user selects at least one option
-}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
